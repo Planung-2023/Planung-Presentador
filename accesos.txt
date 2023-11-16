@@ -1,0 +1,8 @@
+# Remove these lines if you are using the JSON-based configuration.
+AUTH0_DOMAIN=dev-chfwrwnx1accxl7k.us.auth0.com
+AUTH0_CLIENT_ID=nX96ey9t4KIIj84HhqbN5OcAAYFht9QZ
+AUTH0_CLIENT_SECRET=-nO0GR6UKxNkekJlf_L9pXAw6-EfxHe1VO_jxdFGSx6yFT3TKF-Y-tLSfVk-vlXg
+AUTH0_REDIRECT_URI=http://localhost:3000/auth0/callback
+AUTH0_BASE_URL=http://localhost:3000/auth0/callback
+AUTH0_COOKIE_SECRET=805803296c510542d6db1ad022e8e9cd34e8d5f4c9a879933621a2ae5b1e1dfd
+AUTH0_AUDIENCE={yourApiIdentifier}

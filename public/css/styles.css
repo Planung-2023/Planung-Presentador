@@ -1,0 +1,180 @@
+/* En tu archivo CSS */
+.iframe-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio, ajusta esto según tus necesidades */
+  height: 0;
+  overflow: hidden;
+}
+
+.iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* Elimina cualquier borde si lo hubiera */
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #333;
+  }
+  
+  .topbar {
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 0;
+    padding-right: 0;
+    z-index: 1000;
+  }
+  
+  .left-content {
+    margin-right: 0;
+  }
+  
+  .left-content i {
+    font-size: 0;
+  }
+  
+  .center-content {
+    flex-grow: 1;
+    text-align: center;
+  }
+  
+  .rounded-button {
+    border: none;
+    border-radius: 12px;
+    padding: 10px 20px;
+    background-color: #294d61;
+    color: #fff;
+    margin-left: 6%;
+    cursor: pointer;
+  }
+  
+  .right-content {
+    display: flex;
+  }
+  
+  .icon-button {
+    border: none;
+    background-color: transparent;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .bottom-buttons {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+  }
+  .button-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  .button-labels {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-left: 10px;
+  }
+  .labels {
+    color: #fff;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+    }
+  .custom-arrow-button,
+  .custom-play-button {
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    background-color: #294d61;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+  }
+  
+  .custom-play-button {
+    background-color: #294d61;
+  }
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0; /* Espacio entre la barra de navegación y los divs */
+  }
+  
+  .large-centered-box {
+    display: flex;
+    width: 700px;
+    height: 500px;
+    border-radius: 5%;
+    background-color: rgb(134, 134, 134);
+    align-items: center;
+  }
+  
+  .side-boxes {
+    display: flex;
+    border-radius: 5%;
+    margin: 5%;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .top-side-box{
+    width: 250px;
+    height: 150px;
+  }
+  .bottom-side-box {
+    width: 250px;
+    height: 100px;
+  }
+  .bottom-side-box,
+  .top-side-box{
+    margin: 29%;
+    border-radius: 5%;
+    background-color: rgb(134, 134, 134);
+  }
+  body, html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    padding: 0 20px; /* Añadimos espacio a los márgenes */
+  }
+  
+  .topbar {
+    width: 100%;
+    background-color: #333;
+  }

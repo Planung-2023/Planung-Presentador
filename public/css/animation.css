@@ -1,0 +1,28 @@
+#box {
+        width: 100%;
+        height: 100vh; /* vh stands for viewport height */
+    }
+
+body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .login-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(255, 255, 255, 0.1); /* Fondo con transparencia */
+        padding: 20px;
+        border-radius: 10px;
+        backdrop-filter: blur(6px); /* Efecto de desenfoque */
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.5); /* Sombra */
+    }
+
+    .login-card h2 {
+        text-align: center;
+        color: #fff;
+    }
