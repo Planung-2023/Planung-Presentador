@@ -56,32 +56,10 @@ class LoginController extends Controller
             }
 
             $session = $auth0->getCredentials();
-            dd($session);
-            /*$response = Http::withHeaders([
-                "content-type" => "application/x-www-form-urlencoded"
-            ])->post(env('AUTH0_TOKEN_URL'), [
-                'grant_type' => 'authorization_code',
-                'client_id' => env('AUTH0_CLIENT_ID'),
-                'client_secret' => env('AUTH0_CLIENT_SECRET'),
-                'code' => $request->query('code'),
-                'redirectUri' => env('AUTH0_REDIRECT_URI'),
-            ]);
-
-            dd($response);*/
-            /*$auth0 = new Auth0([
-                'domain' => $_ENV['AUTH0_DOMAIN'],
-                'clientId' => $_ENV['AUTH0_CLIENT_ID'],
-                'clientSecret' => $_ENV['AUTH0_CLIENT_SECRET'],
-                'cookieSecret' => $_ENV['AUTH0_COOKIE_SECRET'],
-                'redirectUri' => $_ENV['AUTH0_REDIRECT_URI'],
-            ]);
 
             $userInfo = $auth0->getUser();
-
-            $info = $auth0->getCredentials();
-
-
-            $user = User::where('email', $userInfo['email'])->first();
+            dd($userInfo);//SEGUILA AGUS
+            /*$user = User::where('email', $userInfo['email'])->first();
 
 
             if (!$user) {
