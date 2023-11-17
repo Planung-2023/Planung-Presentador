@@ -58,9 +58,18 @@ class LoginController extends Controller
             $session = $auth0->getCredentials();
 
             $userInfo = $auth0->getUser();
-            dd($userInfo);//SEGUILA AGUS
-            /*$user = User::where('email', $userInfo['email'])->first();
+/* ----------------------------------------------------- Pruebas 17/11
+//
+            Log::info(json_encode($session));
+            Log::info(json_encode($userInfo));
+            $user = User::where('email', $userInfo['email'])->first();
+            Log::info($user);
+//
+//
+            //dd($userInfo);//SEGUILA AGUS
+            $user = User::where('email', $userInfo['email'])->first();
 
+            $usuario = json_encode($userInfo);
 
             if (!$user) {
                 $user = User::create([
@@ -69,55 +78,36 @@ class LoginController extends Controller
                 ]);
             }
 
-            Auth::login($user);*/
+            Log::info($usuario);
+            Log::info($user->email);
+            Log::info('Linea 81');
+            Auth::login($user);
+
+// 
+------------------------------------------*/
 
             return redirect()->route('index');
         } catch (\Exception $e) {
             // Loguea el error
             Log::error($e->getMessage());
             // Puedes redirigir al usuario a una página de error
-            return redirect()->route('login')->with('error', 'Error al obtener la información del usuario de Auth0.');
+            return redirect()->route('index');
+            //return redirect()->route('login')->with('error', 'Error al obtener la información del usuario de Auth0.');
         }
     }
-}
 
-    /*
-    public function handleAuth0Callback(Request $request)
+    public function logout()
     {
-        $auth0 = new Auth0([
-            'domain' => $_ENV['AUTH0_DOMAIN'],
-            'clientId' => $_ENV['AUTH0_CLIENT_ID'],
-            'clientSecret' => $_ENV['AUTH0_CLIENT_SECRET'],
-            'cookieSecret' => $_ENV['AUTH0_COOKIE_SECRET'],
-            'redirectUri' => $_ENV['AUTH0_REDIRECT_URI'],
-        ]);
+        $auth0 = $this->auth0();
 
-        // Obtén la información del usuario de Auth0
-        $userInfo = $auth0->getUser();
+        // Cerrar la sesión de Auth0
+        $auth0->logout();
 
-        // Si el usuario no existe, crea uno nuevo
-        if ($userInfo !== null) {
-            // Busca al usuario en la base de datos por dirección de correo electrónico
-            $user = User::where('email', $userInfo['email'])->first();
+        // Cerrar la sesión de Laravel
+        Auth::logout();
 
-            // Si el usuario no existe, crea uno nuevo
-            if (!$user) {
-                $user = User::create([
-                    'email' => $userInfo['email'],
-                    'nombre' => $userInfo['nombre'], // Asegúrate de ajustar esto según la información que proporciona Auth0
-                    // ... otros campos según sea necesario
-                ]);
-            }
-
-            // Autentica al usuario en Laravel
-            auth()->login($user); // Utiliza \Auth para referenciar directamente el facade Auth de Laravel
-
-            // Personaliza la lógica después de la autenticación exitosa
-            return redirect()->route('index'); // Reemplaza 'index' con la ruta correcta de tu página principal
-        } else {
-            // Maneja el caso en el que no se obtenga la información del usuario correctamente
-            return redirect()->route('login')->with('error', 'Error al obtener la información del usuario de Auth0.');
-        }
+        // Redirigir al usuario a la página de inicio de sesión
+        return redirect()->route('login');
     }
+
 }
-*/

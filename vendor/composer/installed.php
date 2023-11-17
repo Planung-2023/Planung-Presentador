@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'auth0-samples/laravel',
-        'pretty_version' => 'dev-master',
-        'version' => 'dev-master',
-        'reference' => 'c4941aed9c5b58f06aca645d21000c3f27b891ae',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '1b82a9925cf39e08e1451d23398f3cf40949af62',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'auth0-samples/laravel' => array(
-            'pretty_version' => 'dev-master',
-            'version' => 'dev-master',
-            'reference' => 'c4941aed9c5b58f06aca645d21000c3f27b891ae',
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '1b82a9925cf39e08e1451d23398f3cf40949af62',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
