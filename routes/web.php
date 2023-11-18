@@ -26,4 +26,6 @@ Route::group(['middleware' => ['auth']], function () {
   Route::get('/ver-presentacion/{idEvento}', [EventosController::class, 'verPresentacion'])->name('eventos.verPresentacion');
 });
 
+
+
 //Route::get('/index', [HomeController::class, 'index'])->name('index');

@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Auth0\SDK\Auth0;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
+use Auth0\Laravel\Entities\Auth0User;
 
 class LoginController extends Controller
 {
@@ -58,33 +59,31 @@ class LoginController extends Controller
             $session = $auth0->getCredentials();
 
             $userInfo = $auth0->getUser();
-/* ----------------------------------------------------- Pruebas 17/11
+
+            //$user = Usuario::where('email', $userInfo['email'])->first();
+// ----------------------------------------------------- Pruebas 17/11
 //
             Log::info(json_encode($session));
             Log::info(json_encode($userInfo));
-            $user = User::where('email', $userInfo['email'])->first();
-            Log::info($user);
-//
-//
+            //$user = Usuario::where('email', $userInfo['email'])->first();
+            $user = Usuario::where('idAuth0', $userInfo['sub'])->first();
+            //dd($session);
+           // dd($user);
+            //Log::info($user);
+
             //dd($userInfo);//SEGUILA AGUS
-            $user = User::where('email', $userInfo['email'])->first();
 
-            $usuario = json_encode($userInfo);
-
-            if (!$user) {
-                $user = User::create([
-                    'email' => $userInfo['email'],
-                    'nombre' => $userInfo['nombre'],
-                ]);
-            }
-
+            $usuario = $userInfo['sub'];
             Log::info($usuario);
-            Log::info($user->email);
-            Log::info('Linea 81');
-            Auth::login($user);
+            Log::info($user);
+
+
+           if($user !== null) {
+                Auth::login($user);
+           }
 
 // 
-------------------------------------------*/
+//------------------------------------------*/
 
             return redirect()->route('index');
         } catch (\Exception $e) {

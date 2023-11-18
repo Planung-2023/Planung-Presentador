@@ -24,7 +24,7 @@
     "require": {
         "php": "^8.0",
         "auth0/auth0-php": "^8.9",
-        "auth0/login": "*",
+        "auth0/login": "^7.11",
         "guzzlehttp/guzzle": "^7",
         "laravel/framework": "^9",
         "laravel/sanctum": "^3",
