@@ -3,7 +3,7 @@
         'name' => 'auth0-samples/laravel',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '3988668418b5d2112e23ebe73065c5e208920fd8',
+        'reference' => 'a6500f80e9d1ad36e3f6b850c91c3728909a1f1a',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'auth0-samples/laravel' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '3988668418b5d2112e23ebe73065c5e208920fd8',
+            'reference' => 'a6500f80e9d1ad36e3f6b850c91c3728909a1f1a',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

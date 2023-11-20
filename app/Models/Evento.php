@@ -25,4 +25,8 @@ class Evento extends Model
         'usuario_id'
     ];
 
+    public function asistentes()
+    {
+        return $this->hasMany(Asistente::class, 'id');
+    }
 }

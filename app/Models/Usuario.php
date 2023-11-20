@@ -8,19 +8,18 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
-
 class Usuario extends Authenticatable implements AuthenticatableContract
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'usuario';    
-
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var array<int, string>
      */
 
+    protected $table = 'usuario';
+    
     protected $fillable = [
         'id',
         'idAuth0',
@@ -31,4 +30,10 @@ class Usuario extends Authenticatable implements AuthenticatableContract
         'foto_perfil_id',
     ];
 
+    protected $primaryKey = 'id';
+
+    public function eventosAsistidos()
+    {
+        return $this->hasMany(Asistente::class, 'id');
+    }
 }

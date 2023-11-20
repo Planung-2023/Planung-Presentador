@@ -1,0 +1,26 @@
+[2023-11-20 13:31:41] local.INFO: Antes de autenticar al usuario  
+[2023-11-20 13:31:42] local.INFO: Después de autenticar al usuario  
+[2023-11-20 13:31:42] local.INFO: https://dev-bm283xgne37esaxp.us.auth0.com/authorize?state=cef752cd613259a16e1b69466d2b2f25&client_id=VkmBXKNcw6NqIho615b6KLUMPvApdCdo&redirect_uri=http%3A%2F%2Flocalhost%2Fpresentador-laravel%2Fpublic%2Fauth0%2Fcallback&scope=openid%20profile%20email&response_mode=query&response_type=code&nonce=2da5e650fda7e643cc152da8f3585eb7&code_challenge=W1Cz8JTirF8fiPUNJQpvinuRfXkGbZ0JEeMevtSDuyA&code_challenge_method=S256  
+[2023-11-20 13:31:42] local.INFO: usuario de auth0  
+[2023-11-20 13:31:44] local.INFO: array (
+  'given_name' => 'Agustín',
+  'family_name' => 'Harris Cavia',
+  'nickname' => 'agus.cavia.3',
+  'name' => 'Agustín Harris Cavia',
+  'picture' => 'https://lh3.googleusercontent.com/a/ACg8ocLgfBtJ2a9oxDztBuubl3rmnVLOt8g2glgtnk1R5tZBFOd-=s96-c',
+  'locale' => 'es-419',
+  'updated_at' => '2023-11-20T13:31:38.526Z',
+  'email' => 'agus.cavia.3@gmail.com',
+  'email_verified' => true,
+  'iss' => 'https://dev-bm283xgne37esaxp.us.auth0.com/',
+  'aud' => 'VkmBXKNcw6NqIho615b6KLUMPvApdCdo',
+  'iat' => 1700487100,
+  'exp' => 1700523100,
+  'sub' => 'google-oauth2|104790166356456406574',
+  'sid' => 'ishZKcA2s12YYyBRK5DhDrYNjLj5NlDB',
+  'nonce' => 'a78f9c361d0a980bfe73c9101d62fa39',
+)  
+[2023-11-20 13:31:44] local.INFO: usuario de laravel  
+[2023-11-20 13:31:44] local.INFO: {"id":5,"idAuth0":"google-oauth2|104790166356456406574","nombre_usuario":"aguscavia","email":"agus.cavia.3@gmail.com","nombre":"Agustin","apellido":"Harris Cavia","foto_perfil_id":7}  
+[2023-11-20 13:31:44] local.INFO: usuario de la db  
+[2023-11-20 13:31:44] local.INFO: {"id":5,"idAuth0":"google-oauth2|104790166356456406574","nombre_usuario":"aguscavia","email":"agus.cavia.3@gmail.com","nombre":"Agustin","apellido":"Harris Cavia","foto_perfil_id":7}  

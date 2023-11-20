@@ -6,60 +6,39 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use App\Models\Evento;
+use App\Models\Usuario;
 
 class EventosController extends Controller
 {
-    public function tablaEventos(Request $request)
+    public function misEventos()
     {
-        // Obtener el usuario autenticado
-        $user = Auth::user();
-        $usuario = $request->user();
+        // Obtener el usuario autenticado actualmente
+        $userInfo = session('auth0_user');
+        $user = session('usuario_laravel');
 
-        // Loguear información del usuario autenticado
-        Log::info('Usuario autenticado de Auth0:',
-            ['user' => $user],
-        );
-        Log::info(
-            'Usuario autenticado por req:',
-            ['user' => $usuario],
-        );
-        
+        // Obtener el modelo Usuario correspondiente al usuario logueado
+        $usuario = Usuario::where('email', $user['email'])->first();
+        Log::info('usuario de auth0');
+        Log::info($userInfo);
+        Log::info('usuario de laravel');
+        Log::info($user);
+        Log::info('usuario de la db');
+        Log::info($usuario);
 
-        // Verificar si el usuario existe en la base de datos
-        // $usuarioDB = DB::table('usuarios')->where('email', $user->email)->first();
-        /*
-        if (!$usuarioDB) {
-            // El usuario no existe en la base de datos, puedes tomar la acción adecuada
-            return redirect()->route('login');
+        // Verificar si el usuario existe
+        if ($usuario) {
+            // Obtener los eventos en los que el usuario es asistente utilizando Eloquent
+            $eventos = Evento::whereHas('asistentes', function ($query) use ($usuario) {
+                $query->where('id', $usuario->id);
+            })->get();
+
+            // Pasar los eventos a la vista 'index'
+            
         }
-
-        // Usuario existe, ahora obtén el ID de Auth0 y ejecuta la consulta
-        $token = $usuarioDB->idAuth0;
-*/
-        $eventos = [
-            (object)[
-                'nombre_evento' => 'Evento 1',
-                'fecha' => '2023-11-20',
-                'descripcion' => 'Descripción del evento 1',
-                'id_evento' => 1,
-            ],
-            (object)[
-                'nombre_evento' => 'Evento 2',
-                'fecha' => '2023-11-21',
-                'descripcion' => 'Descripción del evento 2',
-                'id_evento' => 2,
-            ],
-        ];
-        /*
-         DB::select("SELECT e.nombre AS nombre_evento, e.fecha AS fecha, e.descripcion AS descripcion, e.id AS id_evento
-            FROM evento e
-            JOIN asistente a ON e.id = a.evento_id
-            JOIN rol r ON a.rol_id = r.id
-            JOIN usuario u ON a.participante_id = u.id
-            WHERE e.tipo_evento = 'Formal' AND r.nombre = 'presentador' AND u.idAuth0 = :token", ['token' => $token]);
-        */
         return view('index', compact('eventos'));
     }
+
 
     public function subirPresentacion($idEvento)
     {

@@ -8,15 +8,14 @@
         </tr>
     </thead>
     <tbody>
-        <!-- Laravel Blade -->
         @foreach ($eventos as $evento)
             <tr>
-                <td style='color: #ffffff'>{{ $evento->nombre_evento }}</td>
+                <td style='color: #ffffff'>{{ $evento->nombre }}</td>
                 <td style='color: #ffffff'>{{ $evento->fecha }}</td>
                 <td style='color: #ffffff'>{{ $evento->descripcion }}</td>
                 <td>
-                    <button style='margin-right:4px' onclick='subirPresentacion({{ $evento->id_evento }})'>Subir Presentaciones</button>
-                    <button style='margin-left:4px' onclick='verPresentacion({{ $evento->id_evento }})'>Ver Presentaciones</button>
+                    <button style='margin-right:4px' onclick='subirPresentacion({{ $evento->id }})'>Subir Presentaciones</button>
+                    <button style='margin-left:4px' onclick='verPresentacion({{ $evento->id }})'>Ver Presentaciones</button>
                 </td>
             </tr>
         @endforeach

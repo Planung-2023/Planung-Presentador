@@ -19,5 +19,15 @@ class Asistente extends Model
         'rol_id',
         'asistencia_id'
     ];
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'id');
+    }
+
+    public function evento()
+    {
+        return $this->belongsTo(Evento::class, 'id');
+    }
 }
 
