@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventosController;
+use App\Http\Controllers\PresentadorController;
 
 // Ruta de inicio de sesión personalizado
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
@@ -24,7 +25,8 @@ Route::group(['middleware' => ['web']], function () {
   Route::get('/ver-presentacion/{idEvento}', [EventosController::class, 'verPresentacion'])->name('ver.presentacion');
 });
 
-
+//pestaña presentador
+Route::get('/presentador', [PresentadorController::class, 'presentador'])->name('presentador'); 
 
 /*
 // Ruta de inicio de sesión personalizado
