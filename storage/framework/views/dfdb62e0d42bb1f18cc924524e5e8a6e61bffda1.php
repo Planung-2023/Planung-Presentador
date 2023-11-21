@@ -2,7 +2,7 @@
     <div>
         <form method="get" action="<?php echo e(route('logout')); ?>">
             <?php echo csrf_field(); ?>
-            <button type="submit">Logout</button>
+            <button type="submit" class="btn btn-secondary">Logout</button>
         </form>
     </div>
 </nav>

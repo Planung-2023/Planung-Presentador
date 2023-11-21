@@ -16,4 +16,8 @@ class EventoPresentaciones extends Model
         "nombre",
         "evento_id",
     ];
+
+    // Desactivar timestamps
+    public $timestamps = false;
+
 }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class PresentadorController extends Controller
 {
     public function presentador(){
-        return view("presentador");
+        return view("presentador.presentador");
     }
 
     
