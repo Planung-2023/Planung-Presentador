@@ -34,7 +34,7 @@ class EventosController extends Controller
         // Verificar si el usuario existe
         if ($usuario) {
             // Obtener los eventos en los que el usuario es asistente utilizando Eloquent
-            $eventos = Evento::select('evento.nombre', 'evento.fecha', 'evento.descripcion', 'evento.id AS id_evento')
+            $eventos = Evento::select('evento.nombre', 'evento.fecha', 'evento.descripcion', 'evento.id')
             ->join('asistente', 'evento.id', '=', 'asistente.evento_id')
             ->join('usuario', 'asistente.participante_id', '=', 'usuario.id')
             ->where('evento.tipo_evento', 'Formal')
@@ -66,12 +66,13 @@ class EventosController extends Controller
         ]);
 
         $idEvento = $request->input('idEvento');
+
         $evento = Evento::findOrFail($idEvento);
 
         // Subir el archivo PDF
         $pdf = $request->file('pdf');
         $nombreArchivo = $pdf->getClientOriginalName();
-        $rutaRelativa = 'archivos/' . $nombreArchivo;
+        $rutaRelativa = 'storage/archivos/' . $nombreArchivo;
 
         // Deshabilitar timestamps
         EventoPresentaciones::flushEventListeners();
@@ -84,7 +85,8 @@ class EventosController extends Controller
         ]);
 
         // Puedes enviar la referencia del archivo como un parámetro en la redirección
-        return redirect()->route('eventos.index', ['referenciaArchivo' => $presentacion->referencia_archivo])->with('success', 'Presentación subida exitosamente.');
+        //return redirect()->route('eventos.index', ['referenciaArchivo' => $presentacion->referencia_archivo])->with('success', 'Presentación subida exitosamente.');
+        return redirect()->route('eventos.index')->with('success', 'Presentación subida exitosamente.');
     }
 
     public function guardarReferenciaArchivo(Request $request)

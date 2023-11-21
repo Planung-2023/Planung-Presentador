@@ -7,7 +7,9 @@
             </div>
             <!-- Verificar si $evento está definido -->
             @isset($evento)
+            {{--
                 <form method="POST" action="{{ route('eventos.guardarPresentacion') }}" enctype="multipart/form-data">
+            --}}
                     @csrf
                     <input type="hidden" name="idEvento" id="idEvento">
                     <div class="modal-body">
@@ -18,9 +20,11 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="submit" class="btn btn-primary">Subir</button>
+                        <button type="button" class="btn btn-primary" id="subirBtn">Subir</button>
                     </div>
+            {{--
                 </form>
+            --}}
             @endisset
         </div>
     </div>

@@ -28,7 +28,7 @@ Route::group(['middleware' => ['web']], function () {
 
 // subir-guardar presentaciones
 Route::get('/eventos/{idEvento}/subir-presentacion', [EventosController::class, 'subirPresentacion'])->name('eventos.subirPresentacion');
-Route::post('/eventos/guardar-presentacion', [EventosController::class, 'guardarPresentacion'])->name('eventos.guardarPresentacion');
+Route::post('/eventos/{idEvento}/guardarPresentacion', [EventosController::class, 'guardarPresentacion'])->name('eventos.guardarPresentacion');
 //Route::post('/eventos/{idEvento}/guardar-presentacion', [EventosController::class, 'guardarPresentacion'])->name('eventos.guardarPresentacion');
 
 //ver-presentaciones

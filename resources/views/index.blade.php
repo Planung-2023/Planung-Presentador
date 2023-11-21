@@ -42,7 +42,7 @@
                             <td style='color: #ffffff'>{{ $evento->fecha }}</td>
                             <td style='color: #ffffff'>{{ $evento->descripcion }}</td>
                             <td>
-                                <button style='margin-right:4px' onclick='subirPresentacion({{ $evento->id }})' data-evento-id="{{ $evento->id }}">Subir Presentaciones</button>
+                                <button style='margin-right:4px' onclick='console.log("ID del Evento:", {{ $evento->id }}); abrirModalConEvento({{ $evento->id }})'>Subir Presentaciones</button>
                                 <button type="button" onclick="mostrarPresentacionesModal()">Ver Presentaciones</button>
                             </td>
                         </tr>
@@ -61,16 +61,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 
     <script>
-        function subirPresentacion(eventId) {
-            $('#subirPresentacionModal').modal('show');
+        // Asignar un valor predeterminado a idEvento
+        $('#idEvento').val(1);
 
-            // Establecer el evento seleccionado
-            $('#subirPresentacionModal').data('evento-seleccionado', eventId);
+        // Función para abrir el modal y establecer el valor de idEvento
+        function abrirModalConEvento(eventoId) {
+        // Setear el valor de idEvento en el input oculto del formulario
+        $('#idEvento').val(eventoId);
+        
+        console.log('Valor de idEvento:', eventoId);
 
-            // Establecer el valor del campo oculto
-            $('#idEvento').val(eventId);
+        // Mostrar el modal
+        $('#subirPresentacionModal').modal('show');
         }
+
+        // Función para ejecutar cuando el modal se muestra
+        $('#subirPresentacionModal').on('shown.bs.modal', function () {
+            // Lógica adicional que puedes agregar cuando el modal se muestra
+            console.log('El modal se ha mostrado');
+        });
     </script>
+
 
     <script>
         function mostrarPresentacionesModal() {
@@ -128,6 +139,51 @@
             }
         }
     </script>
+
+    <script>
+        $(document).ready(function() {
+            $('#subirBtn').one('click', function() {
+                // Obtiene el ID del evento (asegúrate de tener el valor correcto aquí)
+                var idEvento = $('#idEvento').val();
+
+                // Obtiene el token CSRF
+                var csrfToken = $('meta[name="csrf-token"]').attr('content');
+
+                // Crea un objeto FormData para enviar el formulario
+                var formData = new FormData();
+                formData.append('pdf', $('#pdf')[0].files[0]);
+                formData.append('idEvento', idEvento);
+
+                // Agrega el token CSRF a la solicitud
+                formData.append('_token', csrfToken);
+
+                // Realiza la solicitud Ajax con la URL correcta
+                $.ajax({
+                    url: '{{ route("eventos.guardarPresentacion", ["idEvento" => "_idEvento_"]) }}'.replace('_idEvento_', idEvento),
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Maneja la respuesta del servidor
+                        console.log(response);
+                        
+                        // Cierra el modal si la carga es exitosa
+                        $('#subirPresentacionModal').modal('hide');
+
+                        // Puedes redirigir al usuario a la página deseada aquí
+                        window.location.href = '{{ route("eventos.index") }}';
+                    },
+                    error: function(error) {
+                        // Maneja el error
+                        console.log(error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
 
 
 </body>
