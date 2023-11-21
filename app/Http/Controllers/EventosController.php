@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Evento;
 use App\Models\Usuario;
 use App\Models\EventoPresentaciones;
-use Illuminate\Support\Facades\Session;
 
 class EventosController extends Controller
 {
@@ -35,9 +34,13 @@ class EventosController extends Controller
         // Verificar si el usuario existe
         if ($usuario) {
             // Obtener los eventos en los que el usuario es asistente utilizando Eloquent
-            $eventos = Evento::whereHas('asistentes', function ($query) use ($usuario) {
-                $query->where('id', $usuario->id);
-            })->get();
+            $eventos = Evento::select('evento.nombre', 'evento.fecha', 'evento.descripcion', 'evento.id AS id_evento')
+            ->join('asistente', 'evento.id', '=', 'asistente.evento_id')
+            ->join('usuario', 'asistente.participante_id', '=', 'usuario.id')
+            ->where('evento.tipo_evento', 'Formal')
+            ->where('usuario.id', $usuario->id)
+            ->distinct()
+            ->get();
 
             $presentaciones = EventoPresentaciones::all();
 
@@ -56,12 +59,13 @@ class EventosController extends Controller
         return view('includes.popups.subir-presentacion', compact('evento'));
     }
 
-    public function guardarPresentacion(Request $request, $idEvento)
+    public function guardarPresentacion(Request $request)
     {
         $request->validate([
             'pdf' => 'required|mimes:pdf|max:2048',
         ]);
 
+        $idEvento = $request->input('idEvento');
         $evento = Evento::findOrFail($idEvento);
 
         // Subir el archivo PDF
@@ -92,30 +96,5 @@ class EventosController extends Controller
 
         return response()->json(['success' => true]);
     }
-
-    public function presentador(Request $request)
-    {
-        $referenciaArchivo = session('referenciaArchivo');
-        return view('presentador.presentador', compact('referenciaArchivo'));
-    }
-
-/*
-    public function volver()
-    {
-        // Limpiar la referencia del archivo de la sesión
-         Session::forget('referenciaArchivo');
-
-        // Redirigir o hacer cualquier otra cosa que necesites hacer al volver
-        return redirect()->route('eventos.index');
-    }
-*/
-
-    public function presentacion(Request $request)
-    {
-        $referenciaArchivo = $request->query('referenciaArchivo');
-        return view('presentador.presentacion', compact('referenciaArchivo'));
-    }
-
-
 
 }

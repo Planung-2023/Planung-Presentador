@@ -20,14 +20,14 @@ class Asistente extends Model
         'asistencia_id'
     ];
 
-    public function usuario()
+    public function participante()
     {
-        return $this->belongsTo(Usuario::class, 'id');
+        return $this->belongsTo(Participante::class, 'participante_id');
     }
 
     public function evento()
     {
-        return $this->belongsTo(Evento::class, 'id');
+        return $this->belongsTo(Evento::class, 'evento_id');
     }
 }
 

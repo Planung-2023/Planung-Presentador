@@ -42,7 +42,7 @@
                             <td style='color: #ffffff'><?php echo e($evento->fecha); ?></td>
                             <td style='color: #ffffff'><?php echo e($evento->descripcion); ?></td>
                             <td>
-                                <button style='margin-right:4px' onclick='subirPresentacion(<?php echo e($evento->id); ?>)'>Subir Presentaciones</button>
+                                <button style='margin-right:4px' onclick='subirPresentacion(<?php echo e($evento->id); ?>)' data-evento-id="<?php echo e($evento->id); ?>">Subir Presentaciones</button>
                                 <button type="button" onclick="mostrarPresentacionesModal()">Ver Presentaciones</button>
                             </td>
                         </tr>
@@ -51,7 +51,9 @@
             </table>
         </div>
     </div>
+    
     <?php echo $__env->make('includes.popups.subir-presentacion', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+    
     <?php echo $__env->make('includes.popups.ver-presentacion', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('includes.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -61,6 +63,12 @@
     <script>
         function subirPresentacion(eventId) {
             $('#subirPresentacionModal').modal('show');
+
+            // Establecer el evento seleccionado
+            $('#subirPresentacionModal').data('evento-seleccionado', eventId);
+
+            // Establecer el valor del campo oculto
+            $('#idEvento').val(eventId);
         }
     </script>
 

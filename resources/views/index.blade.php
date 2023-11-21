@@ -42,7 +42,7 @@
                             <td style='color: #ffffff'>{{ $evento->fecha }}</td>
                             <td style='color: #ffffff'>{{ $evento->descripcion }}</td>
                             <td>
-                                <button style='margin-right:4px' onclick='subirPresentacion({{ $evento->id }})'>Subir Presentaciones</button>
+                                <button style='margin-right:4px' onclick='subirPresentacion({{ $evento->id }})' data-evento-id="{{ $evento->id }}">Subir Presentaciones</button>
                                 <button type="button" onclick="mostrarPresentacionesModal()">Ver Presentaciones</button>
                             </td>
                         </tr>
@@ -51,7 +51,9 @@
             </table>
         </div>
     </div>
+    {{----}}
     @include('includes.popups.subir-presentacion')
+    {{----}}
     @include('includes.popups.ver-presentacion')
 
     @include('includes.footer')
@@ -61,6 +63,12 @@
     <script>
         function subirPresentacion(eventId) {
             $('#subirPresentacionModal').modal('show');
+
+            // Establecer el evento seleccionado
+            $('#subirPresentacionModal').data('evento-seleccionado', eventId);
+
+            // Establecer el valor del campo oculto
+            $('#idEvento').val(eventId);
         }
     </script>
 

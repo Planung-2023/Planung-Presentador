@@ -32,8 +32,9 @@ class Usuario extends Authenticatable implements AuthenticatableContract
 
     protected $primaryKey = 'id';
 
-    public function eventosAsistidos()
+    public function participante()
     {
-        return $this->hasMany(Asistente::class, 'id');
+        return $this->hasOne(Participante::class, 'usuario_id');
     }
+
 }

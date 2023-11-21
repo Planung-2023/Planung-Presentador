@@ -28,7 +28,8 @@ Route::group(['middleware' => ['web']], function () {
 
 // subir-guardar presentaciones
 Route::get('/eventos/{idEvento}/subir-presentacion', [EventosController::class, 'subirPresentacion'])->name('eventos.subirPresentacion');
-Route::post('/eventos/{idEvento}/guardar-presentacion', [EventosController::class, 'guardarPresentacion'])->name('eventos.guardarPresentacion');
+Route::post('/eventos/guardar-presentacion', [EventosController::class, 'guardarPresentacion'])->name('eventos.guardarPresentacion');
+//Route::post('/eventos/{idEvento}/guardar-presentacion', [EventosController::class, 'guardarPresentacion'])->name('eventos.guardarPresentacion');
 
 //ver-presentaciones
 //Route::get('/eventos/{idEvento}/ver-presentaciones', [EventosController::class, 'verPresentacion'])->name('eventos.verPresentacion');
@@ -39,6 +40,8 @@ Route::post('/guardar-referencia-archivo', [EventosController::class, 'guardarRe
 
 
 //pestaña presentador
-Route::get('/presentador', [EventosController::class, 'presentador'])->name('presentador');
+Route::get('/presentador', [PresentadorController::class, 'presentador'])->name('presentador');
 //volver de la pestaña presentador
-Route::get('/volver', [EventosController::class, 'volver'])->name('volver');
+Route::get('/volver', [PresentadorController::class, 'volver'])->name('volver');
+//pestaña presentación
+Route::get('/presentación', [PresentadorController::class, 'presentacion'])->name('presentacion');

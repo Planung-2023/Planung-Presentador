@@ -4,7 +4,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<title>Pestaña presentación</title>
-		<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+		<link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon.ico')); ?>" />
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 		<style>
 			html.fullscreen-enabled {
@@ -35,7 +35,7 @@
 				var fileInput = document.getElementById("pdfInput");
 
 				// Ruta del archivo preexistente
-				var filePath = "{{ asset($referenciaArchivo) }}";
+				var filePath = "<?php echo e(asset($referenciaArchivo)); ?>";
                 console.log(filePath);
 
 				// Simular el evento de cambio del campo de carga de archivos
@@ -197,4 +197,4 @@
 			});				
 		</script>
 	</body>
-</html>
+</html><?php /**PATH C:\xampp\htdocs\presentador-laravel\resources\views/presentador/presentacion.blade.php ENDPATH**/ ?>

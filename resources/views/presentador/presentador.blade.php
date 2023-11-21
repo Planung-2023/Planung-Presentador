@@ -336,7 +336,7 @@
             }
 
             async function iniciarPresentacion() {
-                const newTab = window.open('presentacion.php?jsonUrl=' , '_blank');
+                const newTab = window.open('{{ route("presentacion") }}' , '_blank');
                 const btnIniciar = document.getElementById("btn-iniciar");
                 const iniciar = document.getElementById("iniciar");
                 const contIniciar = document.getElementById("conteiner-iniciar");
