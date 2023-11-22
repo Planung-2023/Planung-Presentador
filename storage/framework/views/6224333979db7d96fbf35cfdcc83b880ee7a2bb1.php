@@ -9,7 +9,7 @@
                 <label for="presentacionesDropdown">Selecciona una presentación:</label>
                 <select id="presentacionesDropdown" class="form-select">
                     <option value="" disabled selected>Elige una presentación</option>
-                    <?php $__currentLoopData = $presentaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $presentacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php $__currentLoopData = $evento->presentaciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $presentacion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                         <option value="<?php echo e($presentacion->referencia_archivo); ?>"><?php echo e($presentacion->nombre); ?></option>
                     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </select>

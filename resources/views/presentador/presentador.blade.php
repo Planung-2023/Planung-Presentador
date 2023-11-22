@@ -191,11 +191,11 @@
             const imageUrls2 = [];
 
             const outputDiv1 = document.getElementById('output1');
-            outputDiv1.style.width = "698px";
-            outputDiv1.style.height = "400px";
+            outputDiv1.style.width = "728px";
+            outputDiv1.style.height = "410px";
             const outputDiv2 = document.getElementById('output2');
-            outputDiv2.style.width = "280px";
-            outputDiv2.style.height = "150px";
+            outputDiv2.style.width = "282px";
+            outputDiv2.style.height = "160px";
             function enableButton(idButton) {
                 document.getElementById(idButton).disabled = false;
             }

@@ -1,6 +1,24 @@
+.foto-perfil {
+    border-radius: 50%;
+    overflow: hidden;
+    width: 200px;
+    height: 200px;
+    border: 2px solid black;
+    padding: 0%;
+  }
+
+.foto-perfil img{
+    object-fit: cover;
+}
+
 .topbar {
     width: 100%;
     background-color: #333;
+}
+
+.logo{
+    width: 10%;
+    height: 10%;
 }
 
 .white-text {
