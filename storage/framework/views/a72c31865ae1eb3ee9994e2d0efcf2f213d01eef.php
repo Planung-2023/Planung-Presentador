@@ -4,8 +4,8 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pestaña presentador</title>
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-        <link id="theme-style" rel="stylesheet" href="{{ asset('css/styles3.css') }}">
+        <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon.ico')); ?>" />
+        <link id="theme-style" rel="stylesheet" href="<?php echo e(asset('css/styles3.css')); ?>">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/> 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -16,7 +16,7 @@
 
     <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #1a1d20;">
         <div class="container-fluid d-flex">
-            <a href="{{ route('volver') }}" class="btn btn-secondary bi bi-arrow-left-square text-black" style="background-color:#F9DF74;">       Volver</a>
+            <a href="<?php echo e(route('volver')); ?>" class="btn btn-secondary bi bi-arrow-left-square text-black" style="background-color:#F9DF74;">       Volver</a>
             <div id="contenedor-estado" class="bg-secondary p-2 rounded ml-auto d-flex" style="background-color:#F9DF74;">
                 <span id="texto-presentacion" class="text-black">No está presentando</span>
             </div>
@@ -150,7 +150,7 @@
 				var fileInput = document.getElementById("pdfInput");
 
 				// ACA DEBERÍA IR EL FILEPATH SACADO DE LA DB
-				var filePath = "{{ asset($referenciaArchivo) }}";
+				var filePath = "<?php echo e(asset($referenciaArchivo)); ?>";
                 console.log(filePath);
 
 				// Simular el evento de cambio del campo de carga de archivos
@@ -343,7 +343,7 @@
             }
 
             async function iniciarPresentacion() {
-                const newTab = window.open('{{ route("presentacion") }}' , '_blank');
+                const newTab = window.open('<?php echo e(route("presentacion")); ?>' , '_blank');
                 const btnIniciar = document.getElementById("btn-iniciar");
                 const iniciar = document.getElementById("iniciar");
                 const contIniciar = document.getElementById("conteiner-iniciar");
@@ -401,3 +401,4 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     </body>
 </html>
+<?php /**PATH D:\Xumpp\htdocs\presentador-laravel\resources\views/presentador/presentador.blade.php ENDPATH**/ ?>
