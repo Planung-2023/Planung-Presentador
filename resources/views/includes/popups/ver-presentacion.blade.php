@@ -9,7 +9,7 @@
                 <label for="presentacionesDropdown">Selecciona una presentación:</label>
                 <select id="presentacionesDropdown" class="form-select">
                     <option value="" disabled selected>Elige una presentación</option>
-                    @foreach ($presentaciones as $presentacion)
+                    @foreach ($evento->presentaciones as $presentacion)
                         <option value="{{ $presentacion->referencia_archivo }}">{{ $presentacion->nombre }}</option>
                     @endforeach
                 </select>

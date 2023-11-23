@@ -2,9 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\HomeController;
 use App\Http\Controllers\EventosController;
 use App\Http\Controllers\PresentadorController;
+use App\Http\Controllers\PresentacionesController;
 
 
 /* ---------------- Rutas de Login ---------------- */
@@ -35,9 +35,11 @@ Route::post('/eventos/{idEvento}/guardarPresentacion', [EventosController::class
 //Route::get('/eventos/{idEvento}/ver-presentaciones', [EventosController::class, 'verPresentacion'])->name('eventos.verPresentacion');
 //Route::get('/mostrar-presentaciones/{eventId}', [EventosController::class, 'mostrarPresentacionesModal']);
 
-
 Route::post('/guardar-referencia-archivo', [EventosController::class, 'guardarReferenciaArchivo']);
 
+
+// obtener presentaciones de un evento
+Route::get('/presentaciones/{idEvento}', [PresentacionesController::class, 'getPresentacionesPorEvento'])->name('presentaciones.evento');
 
 //pestaña presentador
 Route::get('/presentador', [PresentadorController::class, 'presentador'])->name('presentador');

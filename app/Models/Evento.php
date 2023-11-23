@@ -29,4 +29,9 @@ class Evento extends Model
     {
         return $this->hasMany(Asistente::class, 'participante_id');
     }
+
+    public function presentaciones()
+    {
+        return $this->hasMany(EventoPresentaciones::class, 'idevento_presentacion', 'id');
+    }
 }

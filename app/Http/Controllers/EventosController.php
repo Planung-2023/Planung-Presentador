@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Evento;
 use App\Models\Usuario;
 use App\Models\EventoPresentaciones;
+use App\Models\FotoPerfil;
 
 class EventosController extends Controller
 {
@@ -24,33 +25,44 @@ class EventosController extends Controller
 
         // Obtener el modelo Usuario correspondiente al usuario logueado
         $usuario = Usuario::where('email', $user['email'])->first();
+        $nombreUsuario = $usuario['nombre_usuario'];
+
+        $fotoPerfil = FotoPerfil::where('id', $usuario['foto_perfil_id'])->first();
+        $fotoPerfilUsuario = $fotoPerfil['nombre'];
+
+/*
         Log::info('usuario de auth0');
         Log::info($userInfo);
         Log::info('usuario de laravel');
         Log::info($user);
         Log::info('usuario de la db');
         Log::info($usuario);
-
+*/
         // Verificar si el usuario existe
         if ($usuario) {
             // Obtener los eventos en los que el usuario es asistente utilizando Eloquent
-            $eventos = Evento::select('evento.nombre', 'evento.fecha', 'evento.descripcion', 'evento.id')
+            $eventos = Evento::select(
+                'evento.nombre',
+                'evento.fecha',
+                'evento.descripcion',
+                'evento.id',
+                DB::raw('COUNT(evento_presentacion.idevento_presentacion) as cantidad_presentaciones')
+            )
             ->join('asistente', 'evento.id', '=', 'asistente.evento_id')
             ->join('usuario', 'asistente.participante_id', '=', 'usuario.id')
+            ->leftJoin('evento_presentacion', 'evento.id', '=', 'evento_presentacion.evento_id')
             ->where('evento.tipo_evento', 'Formal')
             ->where('usuario.id', $usuario->id)
-            ->distinct()
+            ->groupBy('evento.id', 'evento.nombre', 'evento.fecha', 'evento.descripcion')
             ->get();
-
             $presentaciones = EventoPresentaciones::all();
 
             // Pasar los eventos a la vista 'index'
-            return view('index', compact('eventos', 'presentaciones'));
+            return view('index', compact('eventos', 'presentaciones', 'nombreUsuario', 'fotoPerfilUsuario'));
         }
         else{
             return redirect()->route('login');
         }
-        
     }
 
     public function subirPresentacion($idEvento)
