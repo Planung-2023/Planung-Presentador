@@ -23,13 +23,10 @@ class LoginController extends Controller
     protected $model = Usuario::class;
     protected $redirectTo = '/index';
 
-    // Método para mostrar el formulario de inicio de sesión
     public function showLoginForm()
     {
-        return view('login'); // Reemplaza 'login' con la ruta correcta de tu vista
+        return view('login');
     }
-
-    // Método para redirigir al inicio de sesión de Auth0
 
     /**
      * @return Auth0
@@ -119,78 +116,4 @@ class LoginController extends Controller
         $accessToken = $auth0->getAccessToken();
         Session::put('auth.access_token', $accessToken);
     }
-
-/*
-    public function handleAuth0Callback(Request $request)
-    {
-        //https://auth0.com/docs/get-started/authentication-and-authorization-flow/add-login-auth-code-flow
-        try {
-            $auth0 = $this->auth0();
-
-            // getExchangeParameters() can be used on your callback URL to verify all the necessary parameters are present for post-authentication code exchange.
-            if ($auth0->getExchangeParameters()) {
-                // If they're present, we should perform the code exchange.
-                $auth0->exchange();
-            }
-
-            $session = $auth0->getCredentials();
-
-            $userInfo = $auth0->getUser();
-
-            //$user = Usuario::where('email', $userInfo['email'])->first();
-// ----------------------------------------------------- Pruebas 17/11
-//
-            Log::info(json_encode($session));
-            Log::info(json_encode($userInfo));
-            //$user = Usuario::where('email', $userInfo['email'])->first();
-            //$user = Usuario::where('idAuth0', $userInfo['sub'])->first();
-            //dd($session);
-            //dd($user);
-            //Log::info($user);
-
-            //dd($userInfo);//SEGUILA AGUS
-
-            $user = Usuario::firstOrCreate(
-                ['email' => $userInfo['email']],
-                [
-                    'nombre' => $userInfo['given_name'],
-                    'apellido' => $userInfo['family_name'],
-                    'nombre_usuario' => $userInfo['nickname'],
-                    'idAuth0' => $userInfo['sub'],
-                    'foto_perfil_id' => 1,
-                ]
-            );
-
-            $usuario = $userInfo['sub'];
-            Log::info($usuario);
-            Log::info($user);
-
-
-           if($user !== null) {
-                //Auth::login($user, true);
-                $auth0->login($user);
-           }
-
-            if (Auth::check()) {
-                // Usuario autenticado correctamente
-                return redirect()->intended('index');
-            } else {
-                // Problema con la autenticación
-                return redirect()->route('login')->with('error', 'Error al autenticar al usuario.');
-            }
-
-            // 
-            //------------------------------------------
-
-            //return redirect()->route('index');
-            //return redirect()->intended('index');
-        } catch (\Exception $e) {
-            // Loguea el error
-            Log::error($e->getMessage());
-            // Puedes redirigir al usuario a una página de error
-            return redirect()->intended('index');
-            //return redirect()->route('login')->with('error', 'Error al obtener la información del usuario de Auth0.');
-        }
-    }
-*/
 }

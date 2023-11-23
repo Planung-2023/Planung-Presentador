@@ -10,12 +10,13 @@ use App\Models\Evento;
 use App\Models\Usuario;
 use App\Models\EventoPresentaciones;
 use App\Models\FotoPerfil;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class EventosController extends Controller
 {
     public function misEventos()
     {
-        // Obtener el usuario autenticado actualmente
         $userInfo = session('auth0_user');
         $user = session('usuario_laravel');
 
@@ -23,41 +24,34 @@ class EventosController extends Controller
             return redirect()->route('login');
         }
 
-        // Obtener el modelo Usuario correspondiente al usuario logueado
         $usuario = Usuario::where('email', $user['email'])->first();
         $nombreUsuario = $usuario['nombre_usuario'];
 
         $fotoPerfil = FotoPerfil::where('id', $usuario['foto_perfil_id'])->first();
         $fotoPerfilUsuario = $fotoPerfil['nombre'];
 
-/*
-        Log::info('usuario de auth0');
-        Log::info($userInfo);
-        Log::info('usuario de laravel');
-        Log::info($user);
-        Log::info('usuario de la db');
-        Log::info($usuario);
-*/
-        // Verificar si el usuario existe
+        $fechaActual = now();
+
         if ($usuario) {
-            // Obtener los eventos en los que el usuario es asistente utilizando Eloquent
+
             $eventos = Evento::select(
                 'evento.nombre',
                 'evento.fecha',
                 'evento.descripcion',
                 'evento.id',
-                DB::raw('COUNT(evento_presentacion.idevento_presentacion) as cantidad_presentaciones')
+                DB::raw('COUNT(DISTINCT evento_presentacion.idevento_presentacion) as cantidad_presentaciones')
             )
             ->join('asistente', 'evento.id', '=', 'asistente.evento_id')
             ->join('usuario', 'asistente.participante_id', '=', 'usuario.id')
             ->leftJoin('evento_presentacion', 'evento.id', '=', 'evento_presentacion.evento_id')
             ->where('evento.tipo_evento', 'Formal')
             ->where('usuario.id', $usuario->id)
+            ->where('evento.fecha', '>=', $fechaActual)
             ->groupBy('evento.id', 'evento.nombre', 'evento.fecha', 'evento.descripcion')
             ->get();
+
             $presentaciones = EventoPresentaciones::all();
 
-            // Pasar los eventos a la vista 'index'
             return view('index', compact('eventos', 'presentaciones', 'nombreUsuario', 'fotoPerfilUsuario', 'usuario'));
         }
         else{
@@ -74,41 +68,41 @@ class EventosController extends Controller
     public function guardarPresentacion(Request $request)
     {
         $request->validate([
-            'pdf' => 'required|mimes:pdf|max:2048',
+            'pdf' => 'required|mimes:pdf|max:10240',
         ]);
 
         $idEvento = $request->input('idEvento');
-
         $evento = Evento::findOrFail($idEvento);
 
         // Subir el archivo PDF
         $pdf = $request->file('pdf');
-        $nombreArchivo = $pdf->getClientOriginalName();
-        $rutaRelativa = 'storage/archivos/' . $nombreArchivo;
+        $nombreOriginal = $pdf->getClientOriginalName();
+
+        $nombreArchivo = Str::slug(pathinfo($nombreOriginal, PATHINFO_FILENAME)) . '.' . $pdf->getClientOriginalExtension();
+
+        // Verificar si ya existe una presentación con el mismo nombre para el evento
+        $presentacionExistente = EventoPresentaciones::where('nombre', $nombreArchivo)
+            ->where('evento_id', $evento->id)
+            ->first();
+
+        if ($presentacionExistente) {
+            return redirect()->route('eventos.index')->with('error', 'Ya existe una presentación con este nombre para este evento.');
+        }
+
+        // Mover el archivo a la carpeta de almacenamiento con un nombre único
+        $rutaArchivo = $pdf->storeAs('archivos', $nombreArchivo, 'public');
 
         // Deshabilitar timestamps
         EventoPresentaciones::flushEventListeners();
 
         // Guardar la información en la base de datos sin timestamps
         $presentacion = EventoPresentaciones::create([
-            'referencia_archivo' => $rutaRelativa,
+            'referencia_archivo' => Storage::url($rutaArchivo),
             'nombre' => $nombreArchivo,
             'evento_id' => $evento->id,
         ]);
 
-        // Puedes enviar la referencia del archivo como un parámetro en la redirección
-        //return redirect()->route('eventos.index', ['referenciaArchivo' => $presentacion->referencia_archivo])->with('success', 'Presentación subida exitosamente.');
-        return redirect()->route('eventos.index')->with('success', 'Presentación subida exitosamente.');
-    }
-
-    public function guardarReferenciaArchivo(Request $request)
-    {
-        $referenciaArchivo = $request->input('referenciaArchivo');
-
-        // Guardar la referencia del archivo en la sesión
-        session(['referenciaArchivo' => $referenciaArchivo]);
-
-        return response()->json(['success' => true]);
+        return redirect()->route('eventos.index');
     }
 
 }

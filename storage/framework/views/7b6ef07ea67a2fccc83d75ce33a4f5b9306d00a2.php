@@ -17,7 +17,7 @@
     
     <?php echo $__env->make('includes.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    <div class="col-md-10 text-center mx-auto" style="background-color:#6a6d71; padding:20px; border-radius: 10px; margin-top: 4%; color: #ffffff;">
+    <div class="col-md-11 text-center mx-auto" style="background-color:#6a6d71; padding:20px; border-radius: 10px; margin-top: 4%; color: #ffffff;">
         <h2 class="mb-4 text-center">Listado de Eventos</h2>
         <div class="col-md-12 text-center">
             <table class="table table-striped table-hover table-bordered table-rounded">

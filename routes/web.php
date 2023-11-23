@@ -6,7 +6,6 @@ use App\Http\Controllers\EventosController;
 use App\Http\Controllers\PresentadorController;
 use App\Http\Controllers\PresentacionesController;
 
-
 /* ---------------- Rutas de Login ---------------- */
 // Ruta de inicio de sesión personalizado
 Route::get('/', [LoginController::class, 'showLoginForm'])->name('login');
@@ -21,30 +20,29 @@ Route::get('/auth0/callback', [LoginController::class, 'login']);
 Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 /* ------------------------------------------------ */
 
-/* ---------------- Rutas de Eventos/Presentaciones ---------------- */
+/* ---------------- Ruta de Eventos ---------------- */
+// ruta de index
 Route::group(['middleware' => ['web']], function () {
   Route::get('/index', [EventosController::class, 'misEventos'])->name('eventos.index');
 });
 
-// subir-guardar presentaciones
+// subir presentaciones
 Route::get('/eventos/{idEvento}/subir-presentacion', [EventosController::class, 'subirPresentacion'])->name('eventos.subirPresentacion');
+
+// guardar-presentaciones
 Route::post('/eventos/{idEvento}/guardarPresentacion', [EventosController::class, 'guardarPresentacion'])->name('eventos.guardarPresentacion');
-//Route::post('/eventos/{idEvento}/guardar-presentacion', [EventosController::class, 'guardarPresentacion'])->name('eventos.guardarPresentacion');
-
-//ver-presentaciones
-//Route::get('/eventos/{idEvento}/ver-presentaciones', [EventosController::class, 'verPresentacion'])->name('eventos.verPresentacion');
-//Route::get('/mostrar-presentaciones/{eventId}', [EventosController::class, 'mostrarPresentacionesModal']);
-
-Route::post('/guardar-referencia-archivo', [EventosController::class, 'guardarReferenciaArchivo']);
-
 
 // obtener presentaciones de un evento
 Route::get('/presentaciones/{idEvento}', [PresentacionesController::class, 'getPresentacionesPorEvento'])->name('presentaciones.evento');
+/* ------------------------------------------------- */
 
-
-//pestaña presentador
+/* ---------------- Rutas de Presentador ---------------- */
+//pestaña presentador con la presentación seleccionada
 Route::get('/presentador/{idevento_presentacion}', [PresentadorController::class, 'presentador'])->name('presentador');
+
+//pestaña presentación con la presentación seleccionada
+Route::get('/presentacion/{referencia_Archivo}', [PresentadorController::class, 'presentacion'])->name('presentacion');
+
 //volver de la pestaña presentador
 Route::get('/volver', [PresentadorController::class, 'volver'])->name('volver');
-//pestaña presentación
-Route::get('/presentacion/{referencia_Archivo}', [PresentadorController::class, 'presentacion'])->name('presentacion');
+/* ------------------------------------------------- */
