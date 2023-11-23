@@ -65,11 +65,9 @@
 
     <script>
         $(document).ready(function() {
-            // Inicializar dropdown
             $('.dropdown-toggle').dropdown();
             console.log('Dropdown inicializado');
 
-            // Agregar un evento de clic al botón del dropdown
             $('.dropdown-toggle').on('click', function() {
                 console.log('Clic en el dropdown');
             });

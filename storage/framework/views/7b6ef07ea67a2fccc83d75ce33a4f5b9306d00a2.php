@@ -11,6 +11,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon.ico')); ?>" />
+    <style>
+        @font-face {
+            font-family: 'Segoe UI';
+            src: url('<?php echo e(asset("fonts/SegoeUI-VF.ttf")); ?>') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
 </head>
 
 <body style="background-color: #3a3a3a;">

@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Segoe UI';
+    src: "{{asset('fonts/SegoeUI-VF.ttf')}}";
+    font-weight: normal;
+    font-style: normal;
+}
+
 .table-rounded {
         border-radius: 10px; 
         overflow: hidden;

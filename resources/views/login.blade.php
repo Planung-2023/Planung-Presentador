@@ -25,7 +25,7 @@
         <h2 class="text-white">Bienvenido Presentador</h2>
         <form method="get" action="{{ url('/auth0/login') }}">
             @csrf
-            <button class="btn btn-dark" type="submit" style="margin-top:30px; margin-bottom:30px; padding: 10px; border-radius:10px" name="iniciar_sesion">Inicie Sesión</button>
+            <button class="btn btn-dark" type="submit" style="margin-top:30px; margin-bottom:30px; padding: 10px; border-radius:10px" name="iniciar_sesion">Iniciar Sesión</button>
         </form>
     </div>
 
