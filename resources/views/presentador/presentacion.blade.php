@@ -35,7 +35,7 @@
 				var fileInput = document.getElementById("pdfInput");
 
 				// Ruta del archivo preexistente
-				var filePath = "{{ asset($referenciaArchivo) }}";
+				var filePath = "{{ asset($referenciaPresentacion->referencia_archivo) }}";
                 console.log(filePath);
 
 				// Simular el evento de cambio del campo de carga de archivos

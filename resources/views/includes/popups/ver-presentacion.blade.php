@@ -10,7 +10,7 @@
                 <select id="presentacionesDropdown" class="form-select">
                     <option value="" disabled selected>Elige una presentación</option>
                     @foreach ($evento->presentaciones as $presentacion)
-                        <option value="{{ $presentacion->referencia_archivo }}">{{ $presentacion->nombre }}</option>
+                        <option value="{{ $presentacion->idevento_presentacion }}">{{ $presentacion->nombre }}</option>
                     @endforeach
                 </select>
             </div>

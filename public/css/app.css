@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Segoe UI';
+    src: url('/fonts/SegoeUI-Regular.woff2') format('woff2'),
+         url('/fonts/SegoeUI-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+}
+
+h1 {
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: bold;
+}
+
+.login-card {
+    padding: 20px;
+    border-radius: 20px;
+}

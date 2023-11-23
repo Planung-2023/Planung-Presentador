@@ -8,27 +8,21 @@
     <meta name="csrf-token" content=<?php echo e(csrf_token()); ?>>
     <title>Listado de Eventos</title>
     <link rel="stylesheet" href="<?php echo e(asset('css/styles2.css')); ?>">
-    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon.ico')); ?>" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
-    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="icon" type="image/x-icon" href="<?php echo e(asset('favicon.ico')); ?>" />
 </head>
 
 <body style="background-color: #3a3a3a;">
     
     <?php echo $__env->make('includes.navbar', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-    <div class="container" style="background-color:#6a6d71; padding:20px; border-radius: 10px; margin-top: 5%; color: #ffffff;">
-        <h2 class="mt-4 mb-4 text-center">Listado de Eventos</h2>
+    <div class="col-md-10 text-center mx-auto" style="background-color:#6a6d71; padding:20px; border-radius: 10px; margin-top: 4%; color: #ffffff;">
+        <h2 class="mb-4 text-center">Listado de Eventos</h2>
         <div class="col-md-12 text-center">
-            <table class="table table-bordered">
-                <thead style="color: #ffffff">
-                    <tr class="table-dark" style="border-radius:50%">
+            <table class="table table-striped table-hover table-bordered table-rounded">
+                <thead style="color: #ffffff;">
+                    <tr class="table-dark">
                         <th>Evento</th>
                         <th>Fecha</th>
                         <th>Descripción</th>
@@ -41,15 +35,15 @@
                         <tr>
                             <td style='color: #ffffff'><?php echo e($evento->nombre); ?></td>
                             <td style='color: #ffffff'><?php echo e($evento->fecha); ?></td>
-                            <td style='color: #ffffff'><?php echo e($evento->descripcion); ?></td>
+                            <td style='color: #ffffff; white-space: normal !important;'><?php echo e($evento->descripcion); ?></td>
                             <td style='color: #ffffff'><?php echo e($evento->cantidad_presentaciones); ?></td>
                             <td>
-                                <button class="btn btn-secondary" style='margin-right:4px' onclick='console.log("ID del Evento:", <?php echo e($evento->id); ?>); abrirModalConEvento(<?php echo e($evento->id); ?>)'>Subir Presentaciones</button>
+                                <button class="btn btn-dark" style='margin-right:4px' onclick='console.log("ID del Evento:", <?php echo e($evento->id); ?>); abrirModalConEvento(<?php echo e($evento->id); ?>)'>Subir Presentaciones</button>
                                 
                                 <?php if($evento->cantidad_presentaciones > 0): ?>
-                                    <button class="btn btn-secondary" type="button" onclick="mostrarPresentacionesModal(<?php echo e($evento->id); ?>)">Ver Presentaciones</button>
+                                    <button class="btn btn-dark" type="button" onclick="mostrarPresentacionesModal(<?php echo e($evento->id); ?>)">Ver Presentaciones</button>
                                 <?php else: ?>
-                                    <button class="btn btn-secondary" type="button" disabled>Ver Presentaciones</button>
+                                    <button class="btn btn-dark" type="button" disabled>Ver Presentaciones</button>
                                 <?php endif; ?>
                             </td>
                         </tr>
@@ -58,14 +52,29 @@
             </table>
         </div>
     </div>
-    
+
     <?php echo $__env->make('includes.popups.subir-presentacion', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-    
+
     <?php echo $__env->make('includes.popups.ver-presentacion', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <?php echo $__env->make('includes.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function() {
+            // Inicializar dropdown
+            $('.dropdown-toggle').dropdown();
+            console.log('Dropdown inicializado');
+
+            // Agregar un evento de clic al botón del dropdown
+            $('.dropdown-toggle').on('click', function() {
+                console.log('Clic en el dropdown');
+            });
+        });
+    </script>
 
     <script>
         // Asignar un valor predeterminado a idEvento
@@ -99,7 +108,7 @@
 
                     // Agregar las opciones de presentación
                     response.forEach(function(presentacion) {
-                        var option = '<option value="' + presentacion.referencia_archivo + '">' + presentacion.nombre + '</option>';
+                        var option = '<option value="' + presentacion.idevento_presentacion + '">' + presentacion.nombre + '</option>';
                         $('#presentacionesDropdown').append(option);
                     });
 
@@ -115,31 +124,12 @@
 
     <script>
         function redirigirAPresentador() {
-            // Obtener la referencia del archivo seleccionado
-            var referenciaArchivo = $('#presentacionesDropdown').val();
+            var idevento_presentacion = $('#presentacionesDropdown').val();
+            
             // Verificar si se seleccionó una presentación
-            if (referenciaArchivo) {
-                // Obtener el token CSRF
-                var token = $('meta[name="csrf-token"]').attr('content');
-                // Hacer la solicitud Ajax con el token CSRF
-                $.ajax({
-                    url: '<?php echo e(url("/guardar-referencia-archivo")); ?>',
-                    type: 'POST',
-                    data: {
-                        _token: token,
-                        referenciaArchivo: referenciaArchivo
-                    },
-                    success: function(response) {
-                        console.log('Solicitud exitosa');
-                        console.log(response);
-                    },
-                    error: function(error) {
-                        console.error('Error en la solicitud');
-                        console.error(error);
-                    }
-                });
-                // Redirigir al presentador
-                var urlCompleta = '<?php echo e(url("/presentador")); ?>';
+            if (idevento_presentacion !== null) {
+                // Construir la URL sin incluir el fragmento del archivo
+                var urlCompleta = '<?php echo e(url("/presentador/")); ?>' + '/' + idevento_presentacion;
                 window.location.href = urlCompleta;
             } else {
                 // Mostrar un mensaje o realizar alguna acción si no se seleccionó nada

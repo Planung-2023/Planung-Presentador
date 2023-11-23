@@ -2,33 +2,28 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EventoPresentaciones;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
 class PresentadorController extends Controller
 {
-    public function presentador(Request $request)
+    public function presentador($idevento_presentacion)
     {
-        $referenciaArchivo = session('referenciaArchivo');
-
-        return view('presentador.presentador', compact('referenciaArchivo'));
+        $referenciaPresentacion = EventoPresentaciones::where('idevento_presentacion', $idevento_presentacion)->first();
+        return view('presentador.presentador', compact('referenciaPresentacion'));
     }
 
     public function volver()
     {
-        // Limpiar la referencia del archivo de la sesión
-         Session::forget('referenciaArchivo');
-
-        // Redirigir o hacer cualquier otra cosa que necesites hacer al volver
         return redirect()->route('eventos.index');
     }
 
 
-    public function presentacion(Request $request)
+    public function presentacion($idevento_presentacion)
     {
-        $referenciaArchivo = session('referenciaArchivo');
-
-        return view('presentador.presentacion', compact('referenciaArchivo'));
+        $referenciaPresentacion = EventoPresentaciones::where('idevento_presentacion', $idevento_presentacion)->first();
+        return view('presentador.presentacion', compact('referenciaPresentacion'));
     }
 
 

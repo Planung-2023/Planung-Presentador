@@ -10,12 +10,15 @@ class EventoPresentaciones extends Model
     use HasFactory;
 
     protected $table = "evento_presentacion";
+    
     protected $fillable = [
         "idevento_presentacion",
         "referencia_archivo",
         "nombre",
         "evento_id",
     ];
+
+    protected $primaryKey = 'idevento_presentacion';
 
     // Desactivar timestamps
     public $timestamps = false;

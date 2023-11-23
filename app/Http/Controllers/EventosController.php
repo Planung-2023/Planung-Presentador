@@ -58,7 +58,7 @@ class EventosController extends Controller
             $presentaciones = EventoPresentaciones::all();
 
             // Pasar los eventos a la vista 'index'
-            return view('index', compact('eventos', 'presentaciones', 'nombreUsuario', 'fotoPerfilUsuario'));
+            return view('index', compact('eventos', 'presentaciones', 'nombreUsuario', 'fotoPerfilUsuario', 'usuario'));
         }
         else{
             return redirect()->route('login');

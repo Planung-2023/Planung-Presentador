@@ -16,12 +16,13 @@
 
     <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #1a1d20;">
         <div class="container-fluid d-flex">
-            <a href="<?php echo e(route('volver')); ?>" class="btn btn-secondary bi bi-arrow-left-square text-black" style="background-color:#F9DF74;">       Volver</a>
-            <div id="contenedor-estado" class="bg-secondary p-2 rounded ml-auto d-flex" style="background-color:#F9DF74;">
-                <span id="texto-presentacion" class="text-black">No está presentando</span>
+            <a href="<?php echo e(route('volver')); ?>" class="btn btn-secondary bi bi-arrow-left-square text-white bg-secondary">Volver</a>
+            <div id="contenedor-estado" class="bg-secondary p-2 rounded position-absolute top-50 start-50 translate-middle">
+                <span id="texto-presentacion" class="text-white">No está presentando</span>
             </div>
-            <div class="text-black ml-2 d-flex p-2 rounded-2" style="background-color:#F9DF74;">
-                <h7>Presetación: <span id="nombre-archivo" ></span></h2>
+            <div class="text-black ml-2 d-flex p-2 rounded-2 bg-primary">
+                <h6 style="color:#ffffff">Presentación: <?php echo e($referenciaPresentacion->nombre); ?></h6>
+                <!--<span id="nombre-archivo"></span>--> 
             </div>               
         </div>
     </nav>
@@ -36,11 +37,11 @@
         <div class="d-flex align-items-center justify-content-around h-100">
             <div class="d-flex justify-content-center align-items-center flex-column">
                 <h2 class="text-white fs-3  my-4">Diapositiva actual</h2>
-                <div id="output1" class="d-flex p-2 rounded-2" style="background-color:#F9DF74;"></div>
+                <div id="output1" class="d-flex p-2 rounded-2 bg-secondary"></div>
             </div> 
             <div class="side-boxes d-flex flex-column align-items-center">
                 <h3 class="text-white my-4">Siguiente diapositiva</h3>
-                <div id="output2" class="d-flex p-2 rounded-2" style="background-color:#F9DF74;"></div>
+                <div id="output2" class="d-flex p-2 rounded-2 bg-secondary" ></div>
                 <div id="infoDiv">
                     <span class="d-flex text-white align-items-center my-5">
                         <h1 id="currentIndexValue" class="m-0">   
@@ -54,14 +55,14 @@
                         </h1>
                     </span>
                 </div>
-                <div class=" px-4 py-2 rounded-2" style="background-color:#F9DF74;">
-                    <p class="text-black fs-3 text-center m-0" id="tiempo">00:00:00</p>
+                <div class=" px-4 py-2 rounded-2 bg-secondary">
+                    <p class="text-white fs-3 text-center m-0" id="tiempo">00:00:00</p>
                     <div class="d-flex justify-content-around">
                         <div class="btn" onclick="togglePausar()">
-                            <i class="fas fa-pause text-black"></i>
+                            <i class="fas fa-pause text-white"></i>
                         </div>
                         <div class="btn" onclick="reiniciar()">
-                            <i class="fas fa-undo-alt ttext-black"></i>
+                            <i class="fas fa-undo-alt text-white"></i>
                         </div>
                     </div>
                 </div>
@@ -70,19 +71,19 @@
         <div class="bottom-buttons d-flex flex-row justify-content-center" style="background-color: #1a1d20;">
             <div>
                 <p class="labels mx-0 text-center">Anterior</p>
-                <button class="btn btn-secondary rounded-button custom-arrow-button" onclick="showPreviousSlide()" id="btn-anterior" style="background-color:#F9DF74;" disabled><i class="bi bi-chevron-left fs-4 d-flex justify-content-center text-black"></i></button>
+                <button class="btn btn-secondary rounded-button custom-arrow-button bg-secondary" onclick="showPreviousSlide()" id="btn-anterior" disabled><i class="bi bi-chevron-left fs-4 d-flex justify-content-center text-white"></i></button>
             </div>
             <div class="mx-3" id="conteiner-empezar">
                 <p class="labels mx-0 text-center" id="empezar">Empezar</p>
-                <button class="btn btn-secondary custom-play-button" onclick="empezarPresentacion(), iniciar()" id="btn-empezar" style="background-color:#F9DF74;" disabled><i class="bi bi-play-circle fs-2 d-flex justify-content-center text-black"></i></button>
+                <button class="btn btn-secondary custom-play-button bg-secondary" onclick="empezarPresentacion(), iniciar()" id="btn-empezar" disabled><i class="bi bi-play-circle fs-2 d-flex justify-content-center text-white"></i></button>
             </div>
             <div>
                 <p class="labels mx-0 text-center">Siguiente</p>
-                <button class="btn btn-secondary custom-arrow-button" onclick="showNextSlide()" id="btn-siguiente" style="background-color:#F9DF74;" disabled><i class="bi bi-chevron-right fs-4 d-flex justify-content-center text-black"></i></button>
+                <button class="btn btn-secondary custom-arrow-button bg-secondary" onclick="showNextSlide()" id="btn-siguiente" disabled><i class="bi bi-chevron-right fs-4 d-flex justify-content-center text-white"></i></button>
             </div>
             <div class="mx-3" id="conteiner-iniciar"> 
                 <p class="labels mx-0 text-center" id="iniciar">Iniciar</p>
-                <button class="btn btn-secondary custom-arrow-button" onclick="iniciarPresentacion(), convertFileToImagesAndShow()" id="btn-iniciar" style="background-color:#F9DF74;"><i class="bi bi-display fs-2 d-flex justify-content-center text-black"></i></button>
+                <button class="btn btn-secondary custom-arrow-button bg-secondary" onclick="iniciarPresentacion(), convertFileToImagesAndShow()" id="btn-iniciar"><i class="bi bi-display fs-2 d-flex justify-content-center text-white"></i></button>
             </div>
 
         <!-- JS (Parte Lógica) -->
@@ -150,7 +151,7 @@
 				var fileInput = document.getElementById("pdfInput");
 
 				// ACA DEBERÍA IR EL FILEPATH SACADO DE LA DB
-				var filePath = "<?php echo e(asset($referenciaArchivo)); ?>";
+				var filePath = "<?php echo e(asset($referenciaPresentacion->referencia_archivo)); ?>";
                 console.log(filePath);
 
 				// Simular el evento de cambio del campo de carga de archivos
@@ -180,7 +181,6 @@
 					.catch(error => {
 						console.error("Error al cargar el archivo:", error);
 					});
-
 			});
 		</script>
         <script>
@@ -261,7 +261,7 @@
                 };
                 // Decir de manera anticipada la resolucion de la pantalla
                 reader.readAsArrayBuffer(file); 
-                
+              
             }
 
         </script>       
@@ -343,7 +343,8 @@
             }
 
             async function iniciarPresentacion() {
-                const newTab = window.open('<?php echo e(route("presentacion")); ?>' , '_blank');
+                var presentacion = <?php echo e($referenciaPresentacion->idevento_presentacion); ?>;
+                const newTab = window.open('<?php echo e(url("presentacion/")); ?>' + '/' + presentacion , '_blank');
                 const btnIniciar = document.getElementById("btn-iniciar");
                 const iniciar = document.getElementById("iniciar");
                 const contIniciar = document.getElementById("conteiner-iniciar");

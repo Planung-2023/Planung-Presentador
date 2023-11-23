@@ -41,9 +41,10 @@ Route::post('/guardar-referencia-archivo', [EventosController::class, 'guardarRe
 // obtener presentaciones de un evento
 Route::get('/presentaciones/{idEvento}', [PresentacionesController::class, 'getPresentacionesPorEvento'])->name('presentaciones.evento');
 
+
 //pestaña presentador
-Route::get('/presentador', [PresentadorController::class, 'presentador'])->name('presentador');
+Route::get('/presentador/{idevento_presentacion}', [PresentadorController::class, 'presentador'])->name('presentador');
 //volver de la pestaña presentador
 Route::get('/volver', [PresentadorController::class, 'volver'])->name('volver');
 //pestaña presentación
-Route::get('/presentación', [PresentadorController::class, 'presentacion'])->name('presentacion');
+Route::get('/presentacion/{referencia_Archivo}', [PresentadorController::class, 'presentacion'])->name('presentacion');

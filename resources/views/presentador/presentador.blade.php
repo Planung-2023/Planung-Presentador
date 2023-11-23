@@ -16,12 +16,13 @@
 
     <nav class="navbar navbar-expand-lg fixed-top" style="background-color: #1a1d20;">
         <div class="container-fluid d-flex">
-            <a href="{{ route('volver') }}" class="btn btn-secondary bi bi-arrow-left-square text-white bg-secondary">       Volver</a>
+            <a href="{{ route('volver') }}" class="btn btn-secondary bi bi-arrow-left-square text-white bg-secondary">Volver</a>
             <div id="contenedor-estado" class="bg-secondary p-2 rounded position-absolute top-50 start-50 translate-middle">
                 <span id="texto-presentacion" class="text-white">No está presentando</span>
             </div>
-            <div class="text-white ml-2 d-flex p-2 rounded-2 bg-secondary">
-                <h7>Presetación: <span id="nombre-archivo" ></span></h2>
+            <div class="text-black ml-2 d-flex p-2 rounded-2 bg-primary">
+                <h6 style="color:#ffffff">Presentación: {{$referenciaPresentacion->nombre}}</h6>
+                <!--<span id="nombre-archivo"></span>--> 
             </div>               
         </div>
     </nav>
@@ -150,7 +151,7 @@
 				var fileInput = document.getElementById("pdfInput");
 
 				// ACA DEBERÍA IR EL FILEPATH SACADO DE LA DB
-				var filePath = "{{ asset($referenciaArchivo) }}";
+				var filePath = "{{ asset($referenciaPresentacion->referencia_archivo) }}";
                 console.log(filePath);
 
 				// Simular el evento de cambio del campo de carga de archivos
@@ -342,7 +343,8 @@
             }
 
             async function iniciarPresentacion() {
-                const newTab = window.open('{{ route("presentacion") }}' , '_blank');
+                var presentacion = {{$referenciaPresentacion->idevento_presentacion}};
+                const newTab = window.open('{{ url("presentacion/") }}' + '/' + presentacion , '_blank');
                 const btnIniciar = document.getElementById("btn-iniciar");
                 const iniciar = document.getElementById("iniciar");
                 const contIniciar = document.getElementById("conteiner-iniciar");
