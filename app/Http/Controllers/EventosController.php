@@ -33,7 +33,6 @@ class EventosController extends Controller
         $fechaActual = now();
 
         if ($usuario) {
-
             $eventos = Evento::select(
                 'evento.nombre',
                 'evento.fecha',
@@ -52,7 +51,12 @@ class EventosController extends Controller
 
             $presentaciones = EventoPresentaciones::all();
 
-            return view('index', compact('eventos', 'presentaciones', 'nombreUsuario', 'fotoPerfilUsuario', 'usuario'));
+            if($eventos->isEmpty()){
+                return redirect()->route('login');
+            }
+            else{
+                return view('index', compact('eventos', 'presentaciones', 'nombreUsuario', 'fotoPerfilUsuario', 'usuario'));
+            }
         }
         else{
             return redirect()->route('login');
@@ -61,9 +65,15 @@ class EventosController extends Controller
 
     public function subirPresentacion($idEvento)
     {
-        $evento = Evento::findOrFail($idEvento);
+        $evento = Evento::find($idEvento);
+
+        if (!$evento) {
+            return redirect()->route('login')->with('error', 'Evento no encontrado');
+        }
+
         return view('includes.popups.subir-presentacion', compact('evento'));
     }
+
 
     public function guardarPresentacion(Request $request)
     {

@@ -37,4 +37,6 @@ class Usuario extends Authenticatable implements AuthenticatableContract
         return $this->hasOne(Participante::class, 'usuario_id');
     }
 
+    public $timestamps = false;
+
 }
